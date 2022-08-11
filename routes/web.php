@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,58 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+/*
+* STANDARD Routes
+*/
+
+Route::get(
+    '/',
+    [HomeController::class, 'index']
+);
+
+Route::get('/about-us', function () {
+    return view(
+        'home.about-us',
+        ['title' => 'EasyCoach Ke | About Us']
+    );
 });
+
+Route::get('/services', function () {
+    return view(
+        'home.services',
+        ['title' => 'EasyCoach Ke | Services']
+    );
+});
+
+Route::get('/routes', function () {
+    return view(
+        'home.routes',
+        ['title' => 'EasyCoach Ke | Routes']
+    );
+});
+
+/*
+* BOOKING Routes
+*/
+Route::get(
+    '/booking',
+    [BookingController::class, 'index']
+);
+
+/*
+* ADMIN Routes
+*/
+Route::get(
+    '/admin',
+    [AdminController::class, 'index']
+);
+
+Route::get(
+    '/admin/login',
+    [AdminController::class, 'login']
+);
+
+Route::post(
+    '/admin/authenticate',
+    [AdminController::class, 'authenticate']
+);
