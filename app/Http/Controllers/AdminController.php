@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Route;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Flasher\Laravel\Facade\Flasher;
 // use Flasher\Prime\FlasherInterface;
@@ -10,8 +12,9 @@ class AdminController extends Controller
 {
     public function index()
     {
-        // Flasher::addInfo('Login Successful');
-        return view('admin.admin');
+        $data['users'] = User::get();
+        $data['routes'] = Route::get();
+        return view('admin.admin', $data);
     }
 
     public function login()

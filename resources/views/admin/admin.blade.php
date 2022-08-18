@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>Admin Page | Easy Coach Ke</title>
 
@@ -217,6 +218,8 @@
                 </form>
                 <button class="w3-button w3-center w3-section complete__btn" type="submit" name="edit" id="edit">Complete</button>
                 <button class="w3-button w3-center w3-right w3-section delete__btn" name="delete-user" id="delete-user">Delete</button>
+
+                <?php print_r($users);?>
             </section>
 
             <section class="history admin-section animate-opacity" id="history">
@@ -258,27 +261,37 @@
                                 </tr>
                             </thead>
                             <tbody id="routeTable">
-                                
+                                <?php foreach ($routes as $route) { ?>
+                                    <tr>
+                                        <td><?= $route['departure'] ?></td>
+                                        <td><?= $route['destination'] ?></td>
+                                        <td><?= $route['cost'] ?></td>
+                                        <td><button class="routes__edit--btn" onclick="openModal(<?= $route['route_id'] ?>)">Edit</button></td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
 
                     <div class="routes__form">
                         <h2 class="routes__form--title">Add Route</h2>
-                        <div class="routes__form--container">
-                            <div class="routes__form--box">
-                                <input type="text" name="departure" id="departure" placeholder=" " class="routes__form--input">
-                                <label for="departure" class="routes__form--label">Departure Point</label>
+                        <form action="">
+                            @csrf
+                            <div class="routes__form--container">
+                                <div class="routes__form--box">
+                                    <input type="text" name="departure" id="departure" placeholder=" " class="routes__form--input">
+                                    <label for="departure" class="routes__form--label">Departure Point</label>
+                                </div>
+                                <div class="routes__form--box">
+                                    <input type="text" name="destination" id="destination" placeholder=" " class="routes__form--input">
+                                    <label for="destination" class="routes__form--label">Destination</label>
+                                </div>
+                                <div class="routes__form--box">
+                                    <input type="text" name="price" id="price" placeholder=" " class="routes__form--input">
+                                    <label for="price" class="routes__form--label">Price</label>
+                                </div>
                             </div>
-                            <div class="routes__form--box">
-                                <input type="text" name="destination" id="destination" placeholder=" " class="routes__form--input">
-                                <label for="destination" class="routes__form--label">Destination</label>
-                            </div>
-                            <div class="routes__form--box">
-                                <input type="text" name="price" id="price" placeholder=" " class="routes__form--input">
-                                <label for="price" class="routes__form--label">Price</label>
-                            </div>
-                        </div>
+                        </form>
                         <button class="routes__btn" onclick="addRoute()" name="add-route">Add</button>
                     </div>
                 </div>
@@ -298,7 +311,15 @@
                         </tr>
                     </thead>
                     <tbody class="w3-animate-opacity" id="userTable">
-                        
+                        <?php foreach ($users as $user) { ?>
+                            <tr>
+                                <td><?= $user['user_id'] ?></td>
+                                <td><?= ($user['first_name'] != "") ? $user['first_name'] : "-" ?></td>
+                                <td><?= ($user['last_name'] != "") ? $user['last_name'] : "-" ?></td>
+                                <td><?= $user['email'] ?></td>
+                                <td><button class="users__edit--btn" onclick="editUser(<?= $user['user_id'] ?>)">Edit</button></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </section>

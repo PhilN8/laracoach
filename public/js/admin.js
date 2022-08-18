@@ -114,37 +114,47 @@ const addRoute = () => {
         return letter.toUpperCase();
     });
 
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
     $.ajax({
         method: "POST",
-        url: "backend/routes.php",
+        url: "/routes/create",
         data: {
             destination: destination,
             departure: departure,
-            price: price,
+            cost: price,
             add_route: true,
         },
         success: (result) => {
-            var resp = JSON.parse(result);
+            console.log(result);
+            // var resp = JSON.parse(result);
 
-            if (resp.message == 1) toastr.warning("Route Already Exists");
+            if (result.message == 1) toastr.warning("Route Already Exists");
 
-            if (resp.message == 2) {
+            if (result.message == 2) {
                 toastr.success("Route Added Successfully");
                 $("#departure").val("");
                 $("#destination").val("");
                 $("#price").val("");
 
                 $("#routeTable").empty();
-                resp[0].forEach((el) => {
+                result.routes.forEach((el) => {
                     $("#routeTable").append(
                         `<tr><td>${el.departure}</td><td>${el.destination}</td><td>${el.cost}</td><td><button class="routes__edit--btn" onclick="openModal(${el.route_id})">Edit</button></td></tr>`
                     );
                 });
             }
 
-            if (resp.message == 3) toastr.error("Try again later", "Error");
+            if (result.message == 3) toastr.error("Try again later", "Error");
         },
-        error: () => toastr.error("Try again later", "Error"),
+        error: (data) => {
+            toastr.error("Try again later", "Error");
+            console.log(data);
+        },
     });
 };
 

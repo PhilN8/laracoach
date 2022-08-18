@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RouteController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -76,3 +77,5 @@ Route::get(
     '/logout',
     [AdminController::class, 'logout']
 );
+
+Route::post('/routes/create', [RouteController::class, 'create']);
