@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        Flasher::addInfo('Login Successful');
+        // Flasher::addInfo('Login Successful');
         return view('admin.admin');
     }
 
@@ -28,13 +28,28 @@ class AdminController extends Controller
 
         if (auth()->attempt($formFields)) {
             $request->session()->regenerate();
-            Flasher::addSuccess('Login Successful');
-            return redirect('/')
-                // ->with('message', 'You are now logged in')
-            ;
+            Flasher::addInfo('Login Successful');
+            return redirect('/admin');
+            // ->with('message', 'You are now logged in');
         }
 
-        return back()->withErrors(['email' => 'Invalid Credentials'])
+        Flasher::addError('Invalid Credentials');
+        // return redirect('/admin/login');
+        return back()
+            ->withErrors(['email' => 'Invalid Credentials'])
             ->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        Flasher::addInfo('Logout Successful');
+
+        return redirect('/admin/login');
+        // ->with('message', 'You have been logged out!');
     }
 }

@@ -71,3 +71,8 @@ Route::post(
     '/admin/authenticate',
     [AdminController::class, 'authenticate']
 );
+
+Route::get(
+    '/logout',
+    [AdminController::class, 'logout']
+);
