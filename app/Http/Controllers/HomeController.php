@@ -10,7 +10,6 @@ class HomeController extends Controller
 {
     public function index(Flasher $flasher)
     {
-        Flasher::addSuccess('Welcome to EasyCoach');
         return view('home.index', [
             'title' => 'EasyCoach Ke | Home'
         ]);

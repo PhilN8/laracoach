@@ -1,8 +1,8 @@
+<head>
+    <link rel="stylesheet" href="{{asset('css/index.css')}}" />
+    <title>{{$title ?? "EasyCoach KE"}}</title>
+</head>
 <x-layout>
-    <head>
-        <link rel="stylesheet" href="{{asset('css/index.css')}}" />
-        <title>{{$title ?? "EasyCoach KE"}}</title>
-    </head>
     <section class="hero">
         <div class="container hero-container">
             <div class="hero__col">
@@ -46,7 +46,7 @@
                     logistic solutions to our esteemed clients through our extensive
                     network.
                 </p>
-                <a href="services.html" class="services__col--link">More Info</a>
+                <a href="/services" class="services__col--link">More Info</a>
             </div>
         </div>
     </section>

@@ -187,8 +187,9 @@
                     </div>
 
                     <datalist id="all-users">
-
-                        
+                        <?php foreach($users as $user) { ?>
+                            <option value="{{$user['user_id']}}">{{$user['first_name'] . " " . $user['last_name']}}<??></option>
+                        <?php } ?>                        
                     </datalist><br>
 
                     <div class="routes__form--box">
@@ -218,8 +219,6 @@
                 </form>
                 <button class="w3-button w3-center w3-section complete__btn" type="submit" name="edit" id="edit">Complete</button>
                 <button class="w3-button w3-center w3-right w3-section delete__btn" name="delete-user" id="delete-user">Delete</button>
-
-                <?php print_r($users);?>
             </section>
 
             <section class="history admin-section animate-opacity" id="history">

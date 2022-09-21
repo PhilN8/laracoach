@@ -243,3 +243,12 @@ footer.footer {
         margin-left: auto;
     }
 }
+
+@media all and (max-width: 450px) {
+    footer.footer {
+        flex-direction: column;
+        position: static;
+        margin-top: -4rem;
+        gap: 0.75rem;
+    }
+}

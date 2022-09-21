@@ -2,6 +2,10 @@
     margin: 3em 0;
 }
 
+.main-container {
+    margin-bottom: 6rem;
+}
+
 .main__title {
     margin-bottom: 0.9rem;
 }
@@ -16,6 +20,15 @@
 
 .main__col:nth-of-type(2) {
     margin-top: 2em;
+}
+
+.inquiry__text--title {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.inquiry__text--normal {
+    margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 800px) {

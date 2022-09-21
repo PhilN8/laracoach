@@ -61,12 +61,12 @@ Route::get(
 Route::get(
     '/admin',
     [AdminController::class, 'index']
-);
+)->middleware('auth');
 
 Route::get(
     '/admin/login',
     [AdminController::class, 'login']
-);
+)->name("login");
 
 Route::post(
     '/admin/authenticate',
@@ -78,4 +78,7 @@ Route::get(
     [AdminController::class, 'logout']
 );
 
-Route::post('/routes/create', [RouteController::class, 'create']);
+Route::post(
+    '/routes/create',
+    [RouteController::class, 'create']
+);

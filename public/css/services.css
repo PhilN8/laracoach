@@ -34,9 +34,9 @@ main section {
     margin-inline: auto;
 }
 
-
 .cost__table td,
-.parcels__table td, th {
+.parcels__table td,
+th {
     text-align: center;
     border: 1px solid black;
 
@@ -48,7 +48,10 @@ main section {
     background-color: black;
     color: white;
     border: 1px solid white;
+}
 
+.terms {
+    margin-bottom: 6rem;
 }
 
 @media (min-width: 800px) {

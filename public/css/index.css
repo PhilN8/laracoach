@@ -93,15 +93,17 @@
 
 .inquiry {
     padding-block: 3rem;
-    margin-bottom: 2.75rem;
+    margin-bottom: 4rem;
 }
 
 .inquiry__text--title {
     font-weight: 700;
     font-size: 1.2rem;
+    text-align: center;
 }
 
 .inquiry__text--normal {
+    text-align: center;
     margin-bottom: 1rem;
 }
 
@@ -137,6 +139,7 @@
 
 .inquiry__title {
     margin-bottom: 1em;
+    text-align: center;
 }
 
 .inquiry__col--comment {
@@ -186,7 +189,12 @@
     font-size: 0.9rem;
 }
 
-@media screen and (min-width: 40em) {
+textarea.book__form--input {
+    resize: none;
+    height: auto;
+}
+
+@media screen and (min-width: 45rem) {
     .services-container {
         flex-direction: row;
         justify-content: space-around;
@@ -209,6 +217,12 @@
 
     .inquiry__col {
         flex-basis: 100%;
+    }
+
+    .inquiry__text--title,
+    .inquiry__text--normal,
+    .inquiry__title {
+        text-align: left;
     }
 
     .inquiry__col--comment {
