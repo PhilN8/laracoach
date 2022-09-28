@@ -29,21 +29,21 @@ Route::get(
 Route::get('/about-us', function () {
     return view(
         'home.about-us',
-        ['title' => 'EasyCoach Ke | About Us']
+        ['title' => 'About Us | EasyCoach Ke']
     );
 });
 
 Route::get('/services', function () {
     return view(
         'home.services',
-        ['title' => 'EasyCoach Ke | Services']
+        ['title' => 'Services | EasyCoach Ke']
     );
 });
 
 Route::get('/routes', function () {
     return view(
         'home.routes',
-        ['title' => 'EasyCoach Ke | Routes']
+        ['title' => 'Routes | EasyCoach Ke']
     );
 });
 
@@ -82,3 +82,5 @@ Route::post(
     '/routes/create',
     [RouteController::class, 'create']
 );
+
+Route::post('/routes/edit', [RouteController::class, 'edit']);

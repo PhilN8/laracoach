@@ -164,6 +164,7 @@ var modal = document.getElementById("myModal");
 
 const openModal = (editID) => {
     $("#new-cost").val("");
+    $("#new-cost").focus();
     modal.style.display = "block";
     routeID = editID;
 };
@@ -194,24 +195,43 @@ const editCost = () => {
         return;
     }
 
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
     $.ajax({
-        url: "backend/routes.php",
+        url: "/routes/edit",
         method: "POST",
         data: {
             new_cost: newCost,
             route: routeID,
         },
         success: (result) => {
-            var resp = JSON.parse(result);
-
-            if (resp.message == 1) {
-                allRoutes();
-                $("#new-cost").val("");
-                modal.style.display = "none";
-                toastr.success("Cost edited successfully");
+            if (result.message == 1) {
+                toastr.success("Route Edited Successfully");
+                closeModal();
+                $("#routeTable").empty();
+                result.routes.forEach((el) => {
+                    $("#new-cost").val("");
+                    $("#routeTable").append(
+                        `<tr><td>${el.departure}</td><td>${el.destination}</td><td>${el.cost}</td><td><button class="routes__edit--btn" onclick="openModal(${el.route_id})">Edit</button></td></tr>`
+                    );
+                });
             } else toastr.error("Try again later", "Error");
+
+            // if (resp.message == 1) {
+            //     allRoutes();
+            //     $("#new-cost").val("");
+            //     modal.style.display = "none";
+            //     toastr.success("Cost edited successfully");
+            // } else toastr.error("Try again later", "Error");
         },
-        error: () => toastr.error("Try again later", "Failed"),
+        error: (data) => {
+            console.table(data);
+            toastr.error("Try again later", "Failed");
+        },
     });
 };
 

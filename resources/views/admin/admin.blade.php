@@ -334,13 +334,16 @@
             </div>
 
             <div class="modal__body">
-                <div class="routes__form--box">
-                    <input type="number" name="new-cost" id="new-cost" placeholder=" " class="routes__form--input">
-                    <label for="new-cost" class="routes__form--label">Cost</label>
-                </div>
+                <form action="">
+                    @csrf
+                    <div class="routes__form--box">
+                        <input type="number" name="new-cost" id="new-cost" placeholder=" " class="routes__form--input">
+                        <label for="new-cost" class="routes__form--label">Cost</label>
+                    </div>
+                </form>
             </div>
 
-            <button class="routes__btn" id="submitBtn">Submit</button>
+            <button class="routes__btn" id="submitBtn" onclick="editCost()">Submit</button>
             <button class="routes__btn float-right" id="cancelBtn">Cancel</button>
         </div>
 
