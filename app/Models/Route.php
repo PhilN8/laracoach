@@ -16,4 +16,29 @@ class Route extends Model
         'destination',
         'cost',
     ];
+
+    // public function scopeFilter($query, array $filters)
+    // {
+    //     // if ($filters['tag'] ?? false) {
+    //     //     $query->where('tags', 'like', '%' . request('tag') . '%');
+    //     // }
+
+    //     if ($filters['search'] ?? false) {
+    //         $query->where('departure', 'like', '%' . request('search') . '%')
+    //             ->orWhere('destination', 'like', '%' . request('search') . '%');
+    //         // ->orWhere('description', 'like', '%' . request('search') . '%')
+    //     }
+    // }
+    public function scopeFilter($query, $search)
+    {
+        // if ($filters['tag'] ?? false) {
+        //     $query->where('tags', 'like', '%' . request('tag') . '%');
+        // }
+
+        if ($search ?? false) {
+            return $query->where('departure', 'like', '%' . request('search') . '%')
+                ->orWhere('destination', 'like', '%' . request('search') . '%');
+            // ->orWhere('description', 'like', '%' . request('search') . '%')
+        }
+    }
 }
